@@ -21,7 +21,7 @@
 > 
 > GitHub：[https://github.com/xmmwc](https://github.com/xmmwc)
 > 
-> Blog: [https://xmmwc.github.io](https://xmmwc.github.io)
+> Blog：[https://xmmwc.github.io](https://xmmwc.github.io)
 
 ## 教育背景
 
