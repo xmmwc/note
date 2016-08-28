@@ -1,4 +1,4 @@
-##let and const
+## let and const
 
 > 函数级作用域
 
@@ -20,7 +20,6 @@ if(true) {
 }
 console.log(hello); // 'world'
 ```
-
 
 ### var 命令
 
@@ -58,7 +57,7 @@ STATUS_NOT_FOUND = 200;
 // SyntaxError: "STATUS_NOT_FOUND" is read-only
 ```
 
-##Template String
+## Template String
 
 传统的字符串
 
@@ -97,7 +96,7 @@ my name is es6.
 
 > 空格和换行都会被保留
 
-##Arrow Function
+## Arrow Function
 
 允许使用 => 定义函数。
 
@@ -113,7 +112,7 @@ function (x) {
 }
 ```
 
-###作用域
+### 作用域
 
 > 这个箭头函数的作用域和其他函数有一些不同,如果不是严格模式，`this`关键字就是指向`window`，**严格模式**就是`undefined`，在构造函数里的`this`指向的是当前对象实例,如果`this`在一个对象的函数内则`this`指向的是这个对象
 
@@ -176,12 +175,12 @@ doSomething();
 //name is Some Function
 ```
 
-##Promise
+## Promise
 
 > 先mark在这，以后填坑
 
 
-##Generator
+## Generator
 
 ```
 function *gen() {
