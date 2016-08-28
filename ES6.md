@@ -116,7 +116,10 @@ function (x) {
 
 > 这个箭头函数的作用域和其他函数有一些不同,如果不是严格模式，`this`关键字就是指向`window`，**严格模式**就是`undefined`，在构造函数里的`this`指向的是当前对象实例,如果`this`在一个对象的函数内则`this`指向的是这个对象
 
-以下结果我也不知道咋回事
+*据说箭头函数木有自己的`this`*
+
+> 当我们使用箭头函数时，函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，它的this是继承外面的，因此内部的this就是外层代码块的this。
 
 
 ```
@@ -199,4 +202,133 @@ console.log(c); // {value:true, done:true}
 
 ```
 
-留坑，没看完。。。
+## destructuring
+
+ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。
+
+看下面的例子：
+
+```
+let cat = 'ken'
+let dog = 'lili'
+let zoo = {cat: cat, dog: dog}
+console.log(zoo)  //Object {cat: "ken", dog: "lili"}
+```
+
+用ES6完全可以像下面这么写：
+
+```
+let cat = 'ken'
+let dog = 'lili'
+let zoo = {cat, dog}
+console.log(zoo)  //Object {cat: "ken", dog: "lili"}
+```
+
+反过来可以这么写：
+
+```
+let dog = {type: 'animal', many: 2}
+let { type, many} = dog
+console.log(type, many)   //animal 2
+```
+
+## import export
+
+> 传统的写法
+
+定义:
+
+```
+//content.js
+define('content.js', function(){
+    return 'A cat';
+})
+```
+
+require:
+
+```
+//index.js
+require(['./content.js'], function(animal){
+    console.log(animal);   //A cat
+})
+
+```
+
+CommonJS:
+
+```
+//index.js
+var animal = require('./content.js')
+
+//content.js
+module.exports = 'A cat'
+
+```
+
+> ES6写法
+
+```
+//index.js
+import animal from './content'
+
+//content.js
+export default 'A cat'
+```
+
+## ES6 module的其他高级用法
+
+```
+//content.js
+
+export default 'A cat'    
+export function say(){
+    return 'Hello!'
+}    
+export const type = 'dog' 
+```
+
+```
+//index.js
+
+import { say, type } from './content'  
+let says = say()
+console.log(`The ${type} says ${says}`)  //The dog says Hello
+```
+
+> 这里输入的时候要注意：大括号里面的变量名，必须与被导入模块（content.js）对外接口的名称相同。
+
+### 修改变量名
+
+此时我们不喜欢type这个变量名，因为它有可能重名，所以我们需要修改一下它的变量名。在es6中可以用as实现一键换名。
+
+```
+//index.js
+
+import animal, { say, type as animalType } from './content'  
+let says = say()
+console.log(`The ${animalType} says ${says} to ${animal}`)  
+//The dog says Hello to A cat
+```
+
+### 模块的整体加载
+
+除了指定加载某个输出值，还可以使用整体加载，即用星号（`*`）指定一个对象，所有输出值都加载在这个对象上面。
+
+```
+//index.js
+
+import animal, * as content from './content'  
+let says = content.say()
+console.log(`The ${content.type} says ${says} to ${animal}`)  
+//The dog says Hello to A cat
+```
+
+通常星号`*`结合`as`一起使用比较合适。
+
+---
+
+原处：
+
+* [30分钟掌握ES6/ES2015核心内容（上）（下）](https://segmentfault.com/a/1190000004365693)
+* [ES6 走马观花](https://segmentfault.com/a/1190000003764489)
