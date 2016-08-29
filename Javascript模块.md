@@ -106,5 +106,5 @@ twoModule.prototype.method1 = function () {
 ```
 
 
-> 值得注意的是`method`和`method1`都属于twoModule的方法
+> 值得注意的是`method`和`method1`都属于`twoModule`的方法
 而`method1`也属于`twoModule`的`prototype`上的方法，但是`twoModule.prototype.method1.prototype`指向的是`twoModule.method1`
