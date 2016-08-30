@@ -1,8 +1,14 @@
+---
+title: ES6记一下
+date: 2016-08-28 22:32:17
+tags:
+---
+
 ## let and const
 
 > 函数级作用域
 
-```
+```js
 function test() {
   var hello = 'world';
   console.log(hello);
@@ -13,7 +19,7 @@ console.log(hello); // Error: hello is not defined
 
 > 块级作用域
 
-```
+```js
 if(true) {
   var hello = 'world';
   console.log(hello); // 'world'
@@ -21,9 +27,11 @@ if(true) {
 console.log(hello); // 'world'
 ```
 
+<!--more-->
+
 ### var 命令
 
-```
+```js
 if(true) {
   var hello = 'world';
   console.log(hello); // 'world'
@@ -33,7 +41,7 @@ console.log(hello); // 'world'
 
 ### let 命令
 
-```
+```js
 if(true) {
   let hello = 'world';
   console.log(hello); // 'world'
@@ -46,13 +54,13 @@ console.log(hello); // Error: hello is not defined
 
 使用 const 命令声明常量
 
-```
+```js
 const STATUS_NOT_FOUND = 404;
 ```
 
 常量的值为只读，不能修改
 
-```
+```js
 STATUS_NOT_FOUND = 200;
 // SyntaxError: "STATUS_NOT_FOUND" is read-only
 ```
@@ -61,7 +69,7 @@ STATUS_NOT_FOUND = 200;
 
 传统的字符串
 
-```
+```js
 var name = 'es6';
 
 var sayhello = 'hello, \
@@ -72,13 +80,13 @@ console.log(sayhello);
 
 输出：
 
-```
+```js
 hello, my name is es6.
 ```
 
 ES6 模板字符串
 
-```
+```js
 var name = 'es6';
 
 var sayhello = `hello,
@@ -89,7 +97,7 @@ console.log(sayhello);
 
 输出：
 
-```
+```js
 hello,
 my name is es6.
 ```
@@ -100,13 +108,13 @@ my name is es6.
 
 允许使用 => 定义函数。
 
-```
+```js
 x => x+1
 ```
 
 等同于匿名函数
 
-```
+```js
 function (x) {
   return x + 1;
 }
@@ -121,7 +129,7 @@ function (x) {
 并不是因为箭头函数内部有绑定`this`的机制，实际原因是箭头函数根本没有自己的`this`，它的`this`是继承外面的，因此内部的`this`就是外层代码块的`this`。
 
 
-```
+```js
  var name = 'global';
 
 var someObject = {
@@ -151,7 +159,7 @@ console.log('name is %s', d());//name is global
 
 > 箭头函数会自动绑定 `this` 为定义时所在的上下文 ，而不是执行时候的上下文。
 
-```
+```js
 function doSomething(){
     this.name = "Some Function";
 
@@ -181,7 +189,7 @@ doSomething();
 
 ## Generator
 
-```
+```js
 function *gen() {
     yield 'hello';
     yield 'world';
@@ -204,7 +212,7 @@ ES6允许按照一定模式，从数组和对象中提取值，对变量进行�
 
 看下面的例子：
 
-```
+```js
 let cat = 'ken'
 let dog = 'lili'
 let zoo = {cat: cat, dog: dog}
@@ -213,7 +221,7 @@ console.log(zoo)  //Object {cat: "ken", dog: "lili"}
 
 用ES6完全可以像下面这么写：
 
-```
+```js
 let cat = 'ken'
 let dog = 'lili'
 let zoo = {cat, dog}
@@ -222,7 +230,7 @@ console.log(zoo)  //Object {cat: "ken", dog: "lili"}
 
 反过来可以这么写：
 
-```
+```js
 let dog = {type: 'animal', many: 2}
 let { type, many} = dog
 console.log(type, many)   //animal 2
@@ -234,7 +242,7 @@ console.log(type, many)   //animal 2
 
 定义:
 
-```
+```js
 //content.js
 define('content.js', function(){
     return 'A cat';
@@ -243,7 +251,7 @@ define('content.js', function(){
 
 require:
 
-```
+```js
 //index.js
 require(['./content.js'], function(animal){
     console.log(animal);   //A cat
@@ -253,7 +261,7 @@ require(['./content.js'], function(animal){
 
 CommonJS:
 
-```
+```js
 //index.js
 var animal = require('./content.js')
 
@@ -264,7 +272,7 @@ module.exports = 'A cat'
 
 > ES6写法
 
-```
+```js
 //index.js
 import animal from './content'
 
@@ -274,7 +282,7 @@ export default 'A cat'
 
 ## ES6 module的其他高级用法
 
-```
+```js
 //content.js
 
 export default 'A cat'    
@@ -284,7 +292,7 @@ export function say(){
 export const type = 'dog' 
 ```
 
-```
+```js
 //index.js
 
 import { say, type } from './content'  
@@ -298,7 +306,7 @@ console.log(`The ${type} says ${says}`)  //The dog says Hello
 
 此时我们不喜欢type这个变量名，因为它有可能重名，所以我们需要修改一下它的变量名。在es6中可以用as实现一键换名。
 
-```
+```js
 //index.js
 
 import animal, { say, type as animalType } from './content'  
@@ -311,7 +319,7 @@ console.log(`The ${animalType} says ${says} to ${animal}`)
 
 除了指定加载某个输出值，还可以使用整体加载，即用星号（`*`）指定一个对象，所有输出值都加载在这个对象上面。
 
-```
+```js
 //index.js
 
 import animal, * as content from './content'  

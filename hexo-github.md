@@ -1,5 +1,7 @@
 ---
-HEXO+Github
+title: HEXO+Github
+date: 2016-08-27 17:32:59
+tags:
 ---
 
 ### 配置环境
@@ -25,6 +27,8 @@ Node和Git都安装好后,首先创建一个文件夹,如blog,用户存放hexo�
 ```bash 
     $ sudo npm install -g hexo
 ```
+
+<!--more-->
 
 初始化然后，执行init命令初始化hexo,命令：
 
@@ -91,15 +95,15 @@ Node和Git都安装好后,首先创建一个文件夹,如blog,用户存放hexo�
 每次部署的步骤，可按以下三步来进行。
 
 ``` bash
-	$ hexo clean
+    $ hexo clean
 ```
 
 ``` bash
-	$ hexo generate
+    $ hexo generate
 ```
 
 ``` bash
-	$ hexo deploy
+    $ hexo deploy
 ```
 
 一些常用命令：

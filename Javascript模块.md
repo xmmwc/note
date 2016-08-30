@@ -1,6 +1,17 @@
+---
+title: JavaScript模块
+date: 2016-08-29 22:40:17
+tags:
+---
+
+> 之前这些模式都用过,但是经验缺乏的我当时并没有和这些如`模块模式`,`对象字面量`,`构造函数`这些专有名词对应上。突然在书上看到,在这里整理下。
+
+
+<!-- more -->
+
 ### 模块模式
 
-```
+```js
 var someFn = function () {
     var i = 'someString';
     var j = {
@@ -61,7 +72,7 @@ Module模式的还是存在一定的不足：
 
 ### 对象字面量
 
-```
+```js
 var oneModule = {
     var1: 1,
     var2: 'a',
@@ -78,7 +89,7 @@ var oneModule = {
 
 ### 构造函数方式
 
-```
+```js
 var twoModule = function () {
     this.name = 'two';
     this.method = function () {
@@ -89,7 +100,7 @@ var twoModule = function () {
 
 ### prototype原型方式
 
-```
+```js
 var twoModule = function () {
     this.name = 'two';
     this.method = function () {
