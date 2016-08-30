@@ -170,6 +170,10 @@ doSomething();
 //name is Some Function
 ```
 
+> “ES6中的箭头函数并不会使用四条标准的绑定规则，而是根据当前的词法作用域来决定this，具体来说，箭头函数会继承外层函数调用的this绑定（无论this绑定到什么）。这其实和ES6之前代码中的self = this机制一样。”
+
+摘录来自: Kyle Simpson、赵望野、梁杰. “你不知道的JavaScript（上卷）”。 iBooks. 
+
 ## Promise
 
 > 先mark在这，以后填坑
