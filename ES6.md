@@ -116,48 +116,40 @@ function (x) {
 
 > 这个箭头函数的作用域和其他函数有一些不同,如果不是严格模式，`this`关键字就是指向`window`，**严格模式**就是`undefined`，在构造函数里的`this`指向的是当前对象实例,如果`this`在一个对象的函数内则`this`指向的是这个对象
 
-*据说箭头函数木有自己的`this`*
 
-> 当我们使用箭头函数时，函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
-并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，它的this是继承外面的，因此内部的this就是外层代码块的this。
+> 当我们使用箭头函数时，函数体内的`this`对象，就是定义时所在的对象，而不是使用时所在的对象。
+并不是因为箭头函数内部有绑定`this`的机制，实际原因是箭头函数根本没有自己的`this`，它的`this`是继承外面的，因此内部的`this`就是外层代码块的`this`。
 
 
 ```
-"use strict";
+ var name = 'global';
 
-let someObject = {
-    name:'this is name',
-    someFunc:function(){
-        return this.name;
+var someObject = {
+    name: 'name',
+    someFunc: function () {
+      return this.name;
     },
-    someArrowFunc:()=>{
-        return this.name;
-    },
-    someCallBackFunc:function(callback){
-        callback.bind(this)();
+    someArrowFunc: ()=> {
+      return this.name;
     }
 };
 
-console.log('name is %s',someObject.someFunc());
-console.log('name is %s',someObject.someArrowFunc());
+var b = someObject.someFunc;
+var c = someObject.someArrowFunc;
+var d = someObject.someArrowFunc.bind(someObject);
 
-someObject.someCallBackFunc(function(){
-    console.log('name is %s',this.name);
-});
-
-someObject.someCallBackFunc(()=>{
-    console.log('name is %s',this.name);
-});
-
-//name is this is name
-//name is undefined
-//name is this is name
-//name is undefined
+//隐式绑定this
+console.log('name is %s', someObject.someFunc());//name is name
+console.log('name is %s', someObject.someArrowFunc());//name is global
+console.log('name is %s', b());//name is global
+console.log('name is %s', c());//name is global
+//被硬绑定的箭头函数
+console.log('name is %s', d());//name is global
 ```
 
 
 
-> 箭头函数会自动绑定 this 为定义时所在的上下文 ，而不是执行时候的上下文。
+> 箭头函数会自动绑定 `this` 为定义时所在的上下文 ，而不是执行时候的上下文。
 
 ```
 function doSomething(){
